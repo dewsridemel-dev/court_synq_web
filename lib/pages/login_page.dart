@@ -60,6 +60,19 @@ class _LoginPageState extends State<LoginPage> {
           Expanded(
             flex: 1,
             child: Container(
+              width: double.infinity,
+              height: double.infinity,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/login_image.png'),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            )
+          ),
+          /*Expanded(
+            flex: 1,
+            child: Container(
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
@@ -151,7 +164,8 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-          ),
+          ),*/
+
           // Right side - Login form
           Expanded(
             flex: 1,
@@ -171,17 +185,18 @@ class _LoginPageState extends State<LoginPage> {
                           const Text(
                             'Sign In',
                             style: TextStyle(
-                              fontSize: 42,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black87,
+                              fontSize: 24,
+                              fontWeight: FontWeight.w700,
+                              color: Color(0xFF0F172A)
                             ),
                           ),
                           const SizedBox(height: 8),
                           const Text(
-                            'Enter your credentials.',
+                            'Enter your credentials',
                             style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.grey,
+                              fontSize: 14,
+                              color: Color(0xFF64748B),
+                              fontWeight: FontWeight.w400,
                             ),
                           ),
                           const SizedBox(height: 48),
@@ -246,6 +261,8 @@ class _LoginPageState extends State<LoginPage> {
                                         _rememberMe = value ?? true;
                                       });
                                     },
+                                    activeColor: const Color(0xFF0F172A),
+                                    checkColor: Colors.white,
                                   ),
                                   const Text('Remember me'),
                                 ],
@@ -264,11 +281,14 @@ class _LoginPageState extends State<LoginPage> {
                             child: ElevatedButton(
                               onPressed: authService.isLoading ? null : _handleSignIn,
                               style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.purple,
+                                backgroundColor: const Color(0xFF6B7FD7),
                                 foregroundColor: Colors.white,
+                                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
+                                  borderRadius: BorderRadius.circular(12),
                                 ),
+                                minimumSize: const Size(double.infinity, 56),
+                                elevation: 3,
                               ),
                               child: authService.isLoading
                                   ? const SizedBox(
