@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../services/auth_service.dart';
 import '../widgets/booking_dialog.dart';
+import '../widgets/management_card.dart';
+import '../widgets/card_button.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
@@ -124,80 +126,158 @@ class LandingPage extends StatelessWidget {
             const Text(
               'Manage your business',
               style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
               ),
             ),
             const SizedBox(height: 8),
             const Text(
               'Select category to get started',
               style: TextStyle(
-                fontSize: 16,
-                color: Colors.grey,
+                fontSize: 18,
+                fontWeight: FontWeight.w500,
               ),
             ),
             const SizedBox(height: 24),
             // Management Cards
-            Row(
-              children: [
-                Expanded(
-                  child: _ManagementCard(
-                    title: 'Court Reservation Management',
-                    description: 'Book courts, manage availability, and handle customer reservations',
-                    imageAsset: 'assets/badminton.jpg', // You'll need to add this
-                    badgeText: '3 Pending Approvals',
-                    badgeColor: Colors.yellow,
-                    buttons: [
-                      _CardButton(
-                        text: '+ New Booking',
-                        onPressed: () {
-                          showDialog(
-                            context: context,
-                            builder: (context) => const BookingDialog(),
-                          );
-                        },
-                      ),
-                      _CardButton(
-                        text: 'View Calendar',
-                        icon: Icons.calendar_today,
-                        onPressed: () {},
-                      ),
-                      _CardButton(
-                        text: 'Check Availability',
-                        icon: Icons.access_time,
-                        onPressed: () {},
-                      ),
-                    ],
+            LayoutBuilder(
+            builder: (context, constraints) {
+              final isMobile = constraints.maxWidth < 768;
+              
+              if (isMobile) {
+                return Column(
+                  children: [
+                    ManagementCard(
+                      title: 'Court Reservation Management',
+                      description: 'Book courts, manage availability, and handle customer reservations',
+                      badgeText: '3 Pending Approvals',
+                      badgeColor: Colors.yellow,
+                      topLeftIcon: Icons.sports_tennis,
+                      gradientStartColor: Colors.amber.shade700,
+                      gradientEndColor: Colors.amber.shade400,
+                      buttons: [
+                        CardButton(
+                          text: '+ New Booking',
+                          icon: Icons.add,
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => const BookingDialog(),
+                            );
+                          },
+                        ),
+                        CardButton(
+                          text: 'View Calendar',
+                          icon: Icons.calendar_today,
+                          onPressed: () {},
+                        ),
+                        CardButton(
+                          text: 'Check Availability',
+                          icon: Icons.access_time,
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    ManagementCard(
+                      title: 'Classes & Sessions Management',
+                      description: 'Create and manage sports classes and training sessions',
+                      badgeText: '2 Classes Starting Soon',
+                      badgeColor: Colors.blue,
+                      topLeftIcon: Icons.fitness_center,
+                      gradientStartColor: Colors.blue.shade600,
+                      gradientEndColor: Colors.blue.shade300,
+                      buttons: [
+                        CardButton(
+                          text: '+ Create Class',
+                          icon: Icons.add,
+                          onPressed: () {},
+                        ),
+                        CardButton(
+                          text: 'Manage Schedule',
+                          icon: Icons.calendar_today,
+                          onPressed: () {},
+                        ),
+                        CardButton(
+                          text: 'View Enrollments',
+                          icon: Icons.people,
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
+                  ],
+                );
+              }
+              
+              return Row(
+                children: [
+                  Expanded(
+                    child: ManagementCard(
+                      title: 'Court Reservation Management',
+                      description: 'Book courts, manage availability, and handle customer reservations',
+                      badgeText: '3 Pending Approvals',
+                      badgeColor: Colors.yellow,
+                      topLeftIcon: Icons.sports_tennis,
+                      gradientStartColor: Colors.amber.shade700,
+                      gradientEndColor: Colors.amber.shade400,
+                      buttons: [
+                        CardButton(
+                          text: '+ New Booking',
+                          icon: Icons.add,
+                          onPressed: () {
+                            showDialog(
+                              context: context,
+                              builder: (context) => const BookingDialog(),
+                            );
+                          },
+                        ),
+                        CardButton(
+                          text: 'View Calendar',
+                          icon: Icons.calendar_today,
+                          onPressed: () {},
+                        ),
+                        CardButton(
+                          text: 'Check Availability',
+                          icon: Icons.access_time,
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: _ManagementCard(
-                    title: 'Classes & Sessions Management',
-                    description: 'Create and manage sports classes and training sessions',
-                    imageAsset: 'assets/yoga.jpg', // You'll need to add this
-                    badgeText: '2 Classes Starting Soon',
-                    badgeColor: Colors.blue,
-                    buttons: [
-                      _CardButton(
-                        text: '+ Create Class',
-                        onPressed: () {},
-                      ),
-                      _CardButton(
-                        text: 'Manage Schedule',
-                        icon: Icons.calendar_today,
-                        onPressed: () {},
-                      ),
-                      _CardButton(
-                        text: 'View Enrollments',
-                        icon: Icons.people,
-                        onPressed: () {},
-                      ),
-                    ],
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: ManagementCard(
+                      title: 'Classes & Sessions Management',
+                      description: 'Create and manage sports classes and training sessions',
+                      badgeText: '2 Classes Starting Soon',
+                      badgeColor: Colors.blue,
+                      topLeftIcon: Icons.fitness_center,
+                      gradientStartColor: Colors.blue.shade600,
+                      gradientEndColor: Colors.blue.shade300,
+                      buttons: [
+                        CardButton(
+                          text: '+ Create Class',
+                          icon: Icons.add,
+                          onPressed: () {},
+                        ),
+                        CardButton(
+                          text: 'Manage Schedule',
+                          icon: Icons.calendar_today,
+                          onPressed: () {},
+                        ),
+                        CardButton(
+                          text: 'View Enrollments',
+                          icon: Icons.people,
+                          onPressed: () {},
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              );
+            },
             ),
+
             const SizedBox(height: 40),
             const Text(
               "Today's Schedule",
