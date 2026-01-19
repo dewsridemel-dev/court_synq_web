@@ -36,7 +36,7 @@ class NavigationSidebar extends StatefulWidget {
 
 class _NavigationSidebarState extends State<NavigationSidebar> {
   final Map<String, bool> _expandedItems = {
-    'Court Management': true,
+    'Court Management': false,
     'Facility Management': false,
     'Business Profile': false,
   };
@@ -63,7 +63,7 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
         ),
         NavigationItem(
           title: 'Pricing',
-          icon: Icons.price_tag_outlined,
+          icon: Icons.price_check,
           route: '/pricing',
         ),
       ],
@@ -86,7 +86,7 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
     ),
     NavigationItem(
       title: 'Business Profile',
-      icon: Icons.briefcase_outlined,
+      icon: Icons.business_center,
       children: [
         NavigationItem(
           title: 'Profile Settings',

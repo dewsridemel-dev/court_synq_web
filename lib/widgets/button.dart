@@ -1,29 +1,41 @@
 import 'package:flutter/material.dart';
 
-class CardButton extends StatelessWidget {
+class Button extends StatelessWidget {
   final String text;
   final IconData? icon;
   final VoidCallback onPressed;
   final Color? backgroundColor;
   final Color? foregroundColor;
+  final double? height;
 
-  const CardButton({
+  const Button({
     super.key,
     required this.text,
     this.icon,
     required this.onPressed,
     this.backgroundColor,
     this.foregroundColor,
+    this.height
   });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       width: double.infinity,
+      height: height ?? 40.0,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        gradient: const LinearGradient(
+          colors: <Color>[
+            Color(0xFF6972D8),
+            Color(0xFF705CB8),
+          ],
+        ),
+      ),
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
-          backgroundColor: backgroundColor ?? Colors.purple,
+          backgroundColor: Colors.transparent,
           foregroundColor: foregroundColor ?? Colors.white,
           padding: const EdgeInsets.symmetric(
             horizontal: 20,

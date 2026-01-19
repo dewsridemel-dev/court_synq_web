@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import '../services/auth_service.dart';
 import '../widgets/booking_dialog.dart';
 import '../widgets/management_card.dart';
-import '../widgets/card_button.dart';
+import '../widgets/button.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
@@ -152,12 +152,10 @@ class LandingPage extends StatelessWidget {
                       description: 'Book courts, manage availability, and handle customer reservations',
                       badgeText: '3 Pending Approvals',
                       badgeColor: Colors.yellow,
-                      topLeftIcon: Icons.sports_tennis,
-                      gradientStartColor: Colors.amber.shade700,
-                      gradientEndColor: Colors.amber.shade400,
+                      backgroundImage: 'assets/images/court_booking_bkg.jpg',
                       buttons: [
-                        CardButton(
-                          text: '+ New Booking',
+                        Button(
+                          text: 'New Booking',
                           icon: Icons.add,
                           onPressed: () {
                             showDialog(
@@ -165,16 +163,19 @@ class LandingPage extends StatelessWidget {
                               builder: (context) => const BookingDialog(),
                             );
                           },
+                          height: 20,
                         ),
-                        CardButton(
+                        Button(
                           text: 'View Calendar',
                           icon: Icons.calendar_today,
                           onPressed: () {},
+                          height: 20,
                         ),
-                        CardButton(
+                        Button(
                           text: 'Check Availability',
                           icon: Icons.access_time,
                           onPressed: () {},
+                          height: 20,
                         ),
                       ],
                     ),
@@ -184,24 +185,25 @@ class LandingPage extends StatelessWidget {
                       description: 'Create and manage sports classes and training sessions',
                       badgeText: '2 Classes Starting Soon',
                       badgeColor: Colors.blue,
-                      topLeftIcon: Icons.fitness_center,
-                      gradientStartColor: Colors.blue.shade600,
-                      gradientEndColor: Colors.blue.shade300,
+                      backgroundImage: 'assets/images/court_booking_bkg.jpg',
                       buttons: [
-                        CardButton(
-                          text: '+ Create Class',
+                        Button(
+                          text: 'Create Class',
                           icon: Icons.add,
                           onPressed: () {},
+                          height: 20,
                         ),
-                        CardButton(
+                        Button(
                           text: 'Manage Schedule',
                           icon: Icons.calendar_today,
                           onPressed: () {},
+                          height: 20,
                         ),
-                        CardButton(
+                        Button(
                           text: 'View Enrollments',
                           icon: Icons.people,
                           onPressed: () {},
+                          height: 20,
                         ),
                       ],
                     ),
@@ -216,13 +218,11 @@ class LandingPage extends StatelessWidget {
                       title: 'Court Reservation Management',
                       description: 'Book courts, manage availability, and handle customer reservations',
                       badgeText: '3 Pending Approvals',
-                      badgeColor: Colors.yellow,
-                      topLeftIcon: Icons.sports_tennis,
-                      gradientStartColor: Colors.amber.shade700,
-                      gradientEndColor: Colors.amber.shade400,
+                      badgeColor: Color(0xD6FFCC00),
+                      backgroundImage: 'assets/images/court_booking_bkg.jpg',
                       buttons: [
-                        CardButton(
-                          text: '+ New Booking',
+                        Button(
+                          text: 'New Booking',
                           icon: Icons.add,
                           onPressed: () {
                             showDialog(
@@ -230,16 +230,19 @@ class LandingPage extends StatelessWidget {
                               builder: (context) => const BookingDialog(),
                             );
                           },
+                          height: 40,
                         ),
-                        CardButton(
+                        Button(
                           text: 'View Calendar',
                           icon: Icons.calendar_today,
                           onPressed: () {},
+                          height: 40,
                         ),
-                        CardButton(
+                        Button(
                           text: 'Check Availability',
                           icon: Icons.access_time,
                           onPressed: () {},
+                          height: 40,
                         ),
                       ],
                     ),
@@ -251,24 +254,25 @@ class LandingPage extends StatelessWidget {
                       description: 'Create and manage sports classes and training sessions',
                       badgeText: '2 Classes Starting Soon',
                       badgeColor: Colors.blue,
-                      topLeftIcon: Icons.fitness_center,
-                      gradientStartColor: Colors.blue.shade600,
-                      gradientEndColor: Colors.blue.shade300,
+                      backgroundImage: 'assets/images/court_booking_bkg.jpg',
                       buttons: [
-                        CardButton(
-                          text: '+ Create Class',
+                        Button(
+                          text: 'Create Class',
                           icon: Icons.add,
                           onPressed: () {},
+                          height: 40,
                         ),
-                        CardButton(
+                        Button(
                           text: 'Manage Schedule',
                           icon: Icons.calendar_today,
                           onPressed: () {},
+                          height: 40,
                         ),
-                        CardButton(
+                        Button(
                           text: 'View Enrollments',
                           icon: Icons.people,
                           onPressed: () {},
+                          height: 40,
                         ),
                       ],
                     ),
@@ -377,170 +381,6 @@ class _SummaryCard extends StatelessWidget {
               color: color,
             ),
           ),
-        ],
-      ),
-    );
-  }
-}
-
-class _ManagementCard extends StatelessWidget {
-  final String title;
-  final String description;
-  final String imageAsset;
-  final String badgeText;
-  final Color badgeColor;
-  final List<_CardButton> buttons;
-
-  const _ManagementCard({
-    required this.title,
-    required this.description,
-    required this.imageAsset,
-    required this.badgeText,
-    required this.badgeColor,
-    required this.buttons,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 400,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.2),
-            spreadRadius: 2,
-            blurRadius: 8,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Stack(
-        children: [
-          // Background Image
-          ClipRRect(
-            borderRadius: BorderRadius.circular(16),
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Colors.purple.shade300,
-                    Colors.purple.shade100,
-                  ],
-                ),
-              ),
-              child: Center(
-                child: Icon(
-                  Icons.sports_tennis,
-                  size: 150,
-                  color: Colors.white.withOpacity(0.3),
-                ),
-              ),
-            ),
-          ),
-          // Content
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              padding: const EdgeInsets.all(24),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(16),
-                  bottomRight: Radius.circular(16),
-                ),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 12,
-                      vertical: 6,
-                    ),
-                    decoration: BoxDecoration(
-                      color: badgeColor,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Text(
-                      badgeText,
-                      style: const TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-                  Text(
-                    title,
-                    style: const TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    description,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Colors.grey.shade600,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  Wrap(
-                    spacing: 8,
-                    runSpacing: 8,
-                    children: buttons,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _CardButton extends StatelessWidget {
-  final String text;
-  final IconData? icon;
-  final VoidCallback onPressed;
-
-  const _CardButton({
-    required this.text,
-    this.icon,
-    required this.onPressed,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onPressed,
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.purple,
-        foregroundColor: Colors.white,
-        padding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 12,
-        ),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(8),
-        ),
-      ),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          if (icon != null) ...[
-            Icon(icon, size: 16),
-            const SizedBox(width: 4),
-          ],
-          Text(text),
         ],
       ),
     );

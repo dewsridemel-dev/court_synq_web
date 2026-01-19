@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:intl/intl.dart';
 import '../services/supabase_service.dart';
+import '../models/court_booking.dart';
 
 class BookingDialog extends StatefulWidget {
   final String? courtId;
@@ -21,6 +22,17 @@ class BookingDialog extends StatefulWidget {
   @override
   State<BookingDialog> createState() => _BookingDialogState();
 }
+
+typedef OnBookingSubmit = void Function({
+  required String courtId,
+  required String customerName,
+  required BookingStatus status,
+  required String location,
+  required String activity,
+  required String price,
+  required int startHour,
+  required int endHour,
+});
 
 class _BookingDialogState extends State<BookingDialog> {
   final _formKey = GlobalKey<FormState>();

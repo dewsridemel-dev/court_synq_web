@@ -1,6 +1,8 @@
+import 'package:court_synq_web/models/court_booking.dart';
+import 'package:court_synq_web/widgets/booking_dialog.dart';
 import 'package:flutter/material.dart';
 import '../pages/court_details_page.dart';
-import '../pages/dashboard_page.dart';
+import '../pages/court_booking_schedule.dart';
 
 class NavigationPageView extends StatelessWidget {
   final String currentRoute;
@@ -16,9 +18,22 @@ class NavigationPageView extends StatelessWidget {
   Widget build(BuildContext context) {
     Widget pageContent;
 
+    // Test
+    final List<Court> courtList = [
+      const Court(id: "1", name: "Test Court 1"),
+      const Court(id: "2", name: "Test Court 2"),
+      const Court(id: "3", name: "Test Court 3"),
+      const Court(id: "4", name: "Test Court 4"),
+      const Court(id: "5", name: "Test Court 5")
+    ];
+
+    final List<Booking> bookingList = [
+      const Booking(id: "1", courtId: "2", customerName: "Ashraf Deen", status: BookingStatus.confirmed, location: "", activity: "", price: "1500", startHour: 14, endHour: 15)
+    ];
+
     switch (currentRoute) {
       case '/dashboard':
-        pageContent = const DashboardPage();
+        pageContent = CourtBookingSchedule(courts: courtList, bookings: bookingList);
         break;
       case '/court-details':
         pageContent = const CourtDetailsPage();
