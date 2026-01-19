@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../models/court_booking.dart';
 import '../widgets/booking_slot.dart';
 import '../widgets/booking_dialog.dart';
+import '../models/court.dart';
+import '../widgets/date_selector.dart';
 
 /// Displays an hourly court booking schedule. Columns = courts, rows = hours.
 class CourtBookingSchedule extends StatelessWidget {
@@ -35,8 +37,8 @@ class CourtBookingSchedule extends StatelessWidget {
     // Wrap in LayoutBuilder to calculate dynamic width per column
     return LayoutBuilder(
       builder: (context, constraints) {
-        final timeSlotWidth = ((constraints.maxWidth - 48) / (courts.length + 1)) - 100;
-        final columnWidth = (constraints.maxWidth - 48) / (courts.length + 1);print(columnWidth);
+        final timeSlotWidth = 100.0;
+        final columnWidth = (constraints.maxWidth / courts.length) - ((timeSlotWidth + 50) / courts.length);
 
         return SingleChildScrollView(
           padding: const EdgeInsets.all(24),
@@ -46,34 +48,57 @@ class CourtBookingSchedule extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                  Row(
                     children: [
-                      ShaderMask(
-                        shaderCallback: (bounds) => const LinearGradient(
-                          colors: [Color(0xFF6579E1), Color(0xFF754FA8)],
-                          begin: Alignment.topLeft,
-                          end: Alignment.bottomRight,
-                        ).createShader(Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
-                        child: const Text(
-                          'Athletic Performance Center',
-                          style: TextStyle(
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                      Column(
+                        children: [
+                          ShaderMask(
+                            shaderCallback: (bounds) => const LinearGradient(
+                              colors: [Color(0xFF6579E1), Color(0xFF754FA8)],
+                              begin: Alignment.topLeft,
+                              end: Alignment.bottomRight,
+                            ).createShader(Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
+                            child: const Text(
+                              'Athletic Performance Center',
+                              style: TextStyle(
+                                fontSize: 30,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      const Text(
-                        'Professional sports facility management and booking system',
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: Color(0xFF63748B),
-                        ),
+                          const SizedBox(height: 8),
+                          const Text(
+                            'Professional sports facility management and booking system',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xFF63748B),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
+                  ),
+                  const SizedBox(height: 8),
+                  // Calender Controll Buttons
+                  Row(
+                    children: [
+                      const DateSelectorWidget(),
+                    ],
+                  )
+                ],
+              ),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  Text(
+                    'To be develop',
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.w600,
+                      color: Color(0xFF5A5A5A),
+                    ),
                   ),
                 ],
               ),
@@ -167,33 +192,92 @@ class CourtBookingSchedule extends StatelessWidget {
     );
   }
 
+  // Court Header Cell
   Widget _courtHeaderCell(Court court) {
-    IconData icon;
-    switch (court.icon) {
-      case 'badminton':
-        icon = Icons.sports;
-        break;
-      case 'squash':
-        icon = Icons.sports_martial_arts;
-        break;
-      default:
-        icon = Icons.sports_tennis;
-    }
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(icon, size: 20, color: Colors.grey.shade700),
-          const SizedBox(width: 8),
-          Text(
-            court.name,
-            style: const TextStyle(
-              fontWeight: FontWeight.w600,
-              fontSize: 14,
-            ),
+    return Container(
+      height: 150,
+      decoration: BoxDecoration(
+        boxShadow: [
+          BoxShadow(
+            color: Colors.white.withOpacity(0.1),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
           ),
         ],
+      ),
+      child: Container(
+          child: ClipRRect(
+            child: Stack(
+              children: [
+                // Background image
+                Positioned.fill(
+                  child: Image.network(
+                    court.imageUrl,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+                // White overlay
+                Positioned.fill(
+                  child: Container(
+                    color: Colors.white.withOpacity(0.8),
+                  ),
+                ),
+                // Content
+                Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // Circle image
+                      Container(
+                        width: 47,
+                        height: 47,
+                        // decoration: BoxDecoration(
+                        //   shape: BoxShape.circle,
+                        //   border: Border.all(
+                        //     color: Colors.white,
+                        //     width: 4,
+                        //   ),
+                        //   boxShadow: [
+                        //     BoxShadow(
+                        //       color: Colors.black.withOpacity(0.15),
+                        //       blurRadius: 8,
+                        //       offset: const Offset(0, 2),
+                        //     ),
+                        //   ],
+                        // ),
+                        child: ClipOval(
+                          child: Image.network(
+                            court.imageUrl,
+                            fit: BoxFit.cover,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 16),
+                      // Title
+                      Text(
+                        court.name,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black87,
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      // Subtitle
+                      Text(
+                        court.description,
+                        style: TextStyle(
+                          fontSize: 12,
+                          fontWeight: FontWeight.w600,
+                          color: Color(0xFF63748B),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
       ),
     );
   }
@@ -207,8 +291,9 @@ class CourtBookingSchedule extends StatelessWidget {
         child: Text(
           str,
           style: TextStyle(
-            fontSize: 13,
-            color: Colors.grey.shade700,
+            fontWeight: FontWeight.w400,
+            fontSize: 14,
+            color: Color(0xFF5A5A5A),
           ),
         ),
       ),

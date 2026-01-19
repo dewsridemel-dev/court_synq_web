@@ -1,22 +1,9 @@
-class Court {
-  final String id;
-  final String name;
-  final String icon; // 'tennis', 'badminton', 'squash', etc.
-
-  const Court({
-    required this.id,
-    required this.name,
-    this.icon = 'tennis',
-  });
-}
-
 /// Booking status enum.
 enum BookingStatus {
   confirmed,
   pending,
 }
 
-/// Represents a single booking in a time slot.
 class Booking {
   final String id;
   final String courtId;

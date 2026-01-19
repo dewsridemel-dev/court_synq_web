@@ -142,7 +142,7 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
   Widget build(BuildContext context) {
     return Container(
       width: widget.isCollapsed ? 80 : 280,
-      color: Colors.grey.shade50,
+      color: Colors.white,
       child: Column(
         children: [
           // Logo and Toggle Button
@@ -161,31 +161,32 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
                 if (!widget.isCollapsed)
                   Row(
                     children: [
-                      ShaderMask(
-                        shaderCallback: (bounds) => LinearGradient(
-                          colors: [
-                            Colors.purple,
-                            Colors.pink,
-                          ],
-                        ).createShader(bounds),
-                        child: const Text(
-                          'Court SynQ',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                      Container(
+                        height: 20,
+                        width: 100,
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('assets/images/logo/logo_2x.png'),
+                            fit: BoxFit.fill,
                           ),
                         ),
-                      ),
+                      )
                     ],
                   )
                 else
-                  const Text(
-                    'C',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.purple,
+                  ShaderMask(
+                    shaderCallback: (bounds) => const LinearGradient(
+                      colors: [Color(0xFF6579E1), Color(0xFF754FA8)],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ).createShader(Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
+                    child: const Text(
+                      'C',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 IconButton(

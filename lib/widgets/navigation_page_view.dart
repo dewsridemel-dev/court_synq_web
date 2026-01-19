@@ -3,6 +3,7 @@ import 'package:court_synq_web/widgets/booking_dialog.dart';
 import 'package:flutter/material.dart';
 import '../pages/court_details_page.dart';
 import '../pages/court_booking_schedule.dart';
+import '../models/court.dart';
 
 class NavigationPageView extends StatelessWidget {
   final String currentRoute;
@@ -20,15 +21,17 @@ class NavigationPageView extends StatelessWidget {
 
     // Test
     final List<Court> courtList = [
-      const Court(id: "1", name: "Test Court 1"),
-      const Court(id: "2", name: "Test Court 2"),
-      const Court(id: "3", name: "Test Court 3"),
-      const Court(id: "4", name: "Test Court 4"),
-      const Court(id: "5", name: "Test Court 5")
+      const Court(id: "1", name: "Court A", imageUrl: "assets/images/test.jfif", description: "Test Desc.", maxPlayers: 4, minHours: 1, isActive: true, referenceNumber: "REF001"),
+      const Court(id: "2", name: "Cricket Court", imageUrl: "assets/images/test.jfif", description: "This is our cricket court", maxPlayers: 4, minHours: 1, isActive: true, referenceNumber: "REF002"),
+      const Court(id: "3", name: "Tennis Court", imageUrl: "assets/images/test.jfif", description: "", maxPlayers: 4, minHours: 1, isActive: true, referenceNumber: "REF003"),
+      const Court(id: "4", name: "Swimming Pool", imageUrl: "assets/images/test.jfif", description: "", maxPlayers: 4, minHours: 1, isActive: true, referenceNumber: "REF004"),
+      const Court(id: "5", name: "Court C", imageUrl: "assets/images/test.jfif", description: "", maxPlayers: 4, minHours: 1, isActive: true, referenceNumber: "REF005")
     ];
 
     final List<Booking> bookingList = [
-      const Booking(id: "1", courtId: "2", customerName: "Ashraf Deen", status: BookingStatus.confirmed, location: "", activity: "", price: "1500", startHour: 14, endHour: 15)
+      const Booking(id: "1", courtId: "2", customerName: "John Doe", status: BookingStatus.confirmed, location: "Test Location", activity: "Tennis", price: "1500", startHour: 14, endHour: 15),
+      const Booking(id: "2", courtId: "3", customerName: "Ashraf Deen", status: BookingStatus.pending, location: "Street Road", activity: "Cricket", price: "1000", startHour: 7, endHour: 9),
+      const Booking(id: "3", courtId: "1", customerName: "Dewsri De Mel", status: BookingStatus.confirmed, location: "Street Road", activity: "Cricket", price: "1000", startHour: 8, endHour: 9)
     ];
 
     switch (currentRoute) {

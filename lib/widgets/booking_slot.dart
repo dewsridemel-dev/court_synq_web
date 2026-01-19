@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import '../models/court_booking.dart';
 import '../widgets/booking_dialog.dart';
+import '../models/court.dart';
 
 const double _rowHeight = 80;
 
-/// Empty slot with "Add Booking" button. Tapping opens the booking popup.
+/// Empty slot with "Add Booking" button.
 class AddBookingSlot extends StatelessWidget {
   final Court court;
   final int hour;
@@ -42,13 +43,13 @@ class AddBookingSlot extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(Icons.add, size: 28, color: Colors.grey.shade500),
+                  Icon(Icons.add, size: 24, color: Color(0xFFAFB8C4)),
                   const SizedBox(height: 4),
                   Text(
                     'Add Booking',
                     style: TextStyle(
                       fontSize: 12,
-                      color: Colors.grey.shade600,
+                      color: Color(0xFF63748B),
                     ),
                   ),
                 ],
@@ -82,34 +83,13 @@ class BookingDetailsCard extends StatelessWidget {
     required this.spanHours,
   });
 
-  Color _statusColor() {
-    switch (booking.status) {
-      case BookingStatus.confirmed:
-        return Colors.green.shade100;
-      case BookingStatus.pending:
-        return Colors.amber.shade100;
-    }
-  }
-
-  Color _statusTagColor() {
-    switch (booking.status) {
-      case BookingStatus.confirmed:
-        return Colors.green;
-      case BookingStatus.pending:
-        return Colors.amber.shade700;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
-    final cardHeight = (spanHours * _rowHeight) - 8;
-
     return Container(
-      height: cardHeight,
       margin: const EdgeInsets.all(4),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        color: _statusColor(),
+        color: Color(0xFFCAFBF1),
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
@@ -118,6 +98,12 @@ class BookingDetailsCard extends StatelessWidget {
             offset: const Offset(0, 2),
           ),
         ],
+        border: Border(
+          left: BorderSide(
+            color: Color(0xFF00BBA7),
+            width: 4,
+          ),
+        ),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -127,42 +113,72 @@ class BookingDetailsCard extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  '${_formatHour(booking.startHour)} - ${_formatHour(booking.endHour)}',
+                  booking.customerName,
                   style: const TextStyle(
                     fontSize: 12,
-                    fontWeight: FontWeight.w500,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
                 decoration: BoxDecoration(
-                  color: _statusTagColor().withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(12),
+                  color: booking.status == BookingStatus.confirmed ? Color(0xFFDAFCE7) : Color(0xFFFFF2E2),
+                  borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
                   booking.status == BookingStatus.confirmed ? 'Confirmed' : 'Pending',
                   style: TextStyle(
                     fontSize: 10,
-                    fontWeight: FontWeight.w600,
-                    color: _statusTagColor(),
+                    fontWeight: FontWeight.w500,
+                    color: booking.status == BookingStatus.confirmed ? Color(0xFF008000) : Color(0xFFFF5D00), // To be changed by manual or auto
                   ),
                 ),
               ),
             ],
           ),
           const SizedBox(height: 6),
-          Text(
-            booking.customerName,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-            ),
+          Row(
+            children: [
+              Text(
+                '${_formatHour(booking.startHour)} - ${_formatHour(booking.endHour)}',
+                style: const TextStyle(
+                  fontSize: 10,
+                  fontWeight: FontWeight.w600,
+                  color: Color(0xFF63748B),
+                ),
+              ),
+            ],
           ),
-          const SizedBox(height: 4),
-          _detailRow(Icons.location_on_outlined, booking.location),
-          _detailRow(Icons.sports, booking.activity),
-          _detailRow(Icons.attach_money, booking.price),
+          const SizedBox(height: 6),
+          Row(
+            children: [
+              Icon(Icons.location_on_outlined, size: 14, color: Color(0xFF63748B)),
+              const SizedBox(width: 6),
+              Expanded(
+                child: Text(
+                  booking.location,
+                  style: TextStyle(fontSize: 10, color: Color(0xFF63748B), fontWeight: FontWeight.w600),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 6),
+          Row(
+            children: [
+              Expanded(
+                child: Text(
+                  booking.activity,
+                  style: TextStyle(fontSize: 10, color: Color(0xFF63748B), fontWeight: FontWeight.w600),
+                ),
+              ),
+              const SizedBox(height: 6),
+              Text(
+                booking.price,
+                style: TextStyle(fontSize: 10, color: Colors.black87, fontWeight: FontWeight.w600),
+              ),
+            ]
+          ),
         ],
       ),
     );
@@ -178,7 +194,7 @@ class BookingDetailsCard extends StatelessWidget {
           Expanded(
             child: Text(
               text,
-              style: TextStyle(fontSize: 12, color: Colors.grey.shade800),
+              style: TextStyle(fontSize: 12, color: Color(0xFF63748B)),
             ),
           ),
         ],
