@@ -162,8 +162,8 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
                   Row(
                     children: [
                       Container(
-                        height: 20,
-                        width: 100,
+                        width: 120,
+                        height: 28,
                         decoration: const BoxDecoration(
                           image: DecorationImage(
                             image: AssetImage('assets/images/logo/logo_2x.png'),
@@ -206,7 +206,7 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
           // Navigation Items
           Expanded(
             child: ListView.builder(
-              padding: EdgeInsets.zero,
+              padding: !widget.isCollapsed ? EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20) : EdgeInsets.zero,
               itemCount: _navigationItems.length,
               itemBuilder: (context, index) {
                 return _buildNavigationItem(_navigationItems[index]);
@@ -235,20 +235,39 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
           },
           child: Container(
             padding: EdgeInsets.symmetric(
-              horizontal: widget.isCollapsed ? 12 : 20,
-              vertical: 16,
+              horizontal: widget.isCollapsed ? 10 : 15,
+              vertical: 10,
             ),
-            color: isSelected && !hasChildren
-                ? Colors.purple.shade50
-                : Colors.transparent,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: isSelected && !hasChildren
+                    ? [
+                        Color(0xFFD0D1FB), // Left color
+                        Color(0xFFF1F2FE), // Right color
+                      ]
+                    : [Colors.transparent, Colors.transparent],
+              ),
+            ),
             child: Row(
               children: [
-                Icon(
-                  item.icon,
-                  color: isSelected && !hasChildren
-                      ? Colors.purple
-                      : Colors.grey.shade700,
-                  size: 24,
+                Container(
+                  padding: const EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    color: isSelected && !hasChildren
+                        ? Color(0xFF6E73F1)
+                        : Colors.transparent,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Icon(
+                    item.icon,
+                    color: isSelected && !hasChildren
+                        ? Colors.white
+                        : Color(0xFF63748B),
+                    size: 20,
+                  ),
                 ),
                 if (!widget.isCollapsed) ...[
                   const SizedBox(width: 16),
@@ -257,11 +276,11 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
                       item.title,
                       style: TextStyle(
                         color: isSelected && !hasChildren
-                            ? Colors.purple
-                            : Colors.grey.shade700,
+                            ? Color(0xFF6E73F1)
+                            : Color(0xFF63748B),
                         fontWeight: isSelected && !hasChildren
-                            ? FontWeight.w600
-                            : FontWeight.normal,
+                            ? FontWeight.w700
+                            : FontWeight.w700,
                         fontSize: 14,
                       ),
                     ),
@@ -272,7 +291,7 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
                           ? Icons.keyboard_arrow_up
                           : Icons.keyboard_arrow_down,
                       size: 20,
-                      color: Colors.grey.shade600,
+                      color: Color(0xFF63748B),
                     ),
                 ],
               ],
@@ -297,7 +316,7 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
                 margin: const EdgeInsets.only(left: 40),
                 decoration: BoxDecoration(
                   color: isChildSelected
-                      ? Colors.purple.shade50
+                      ? Color(0xFFD0D1FB)
                       : Colors.transparent,
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -306,8 +325,8 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
                     Icon(
                       child.icon,
                       color: isChildSelected
-                          ? Colors.purple
-                          : Colors.grey.shade600,
+                          ? Color(0xFF6E73F1)
+                          : Color(0xFF63748B),
                       size: 20,
                     ),
                     const SizedBox(width: 12),
@@ -316,8 +335,8 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
                         child.title,
                         style: TextStyle(
                           color: isChildSelected
-                              ? Colors.purple
-                              : Colors.grey.shade700,
+                              ? Color(0xFF6E73F1)
+                              : Color(0xFF63748B),
                           fontWeight: isChildSelected
                               ? FontWeight.w600
                               : FontWeight.normal,

@@ -4,6 +4,8 @@ import '../services/auth_service.dart';
 import '../widgets/booking_dialog.dart';
 import '../widgets/management_card.dart';
 import '../widgets/button.dart';
+import '../widgets/app_header.dart';
+import '../widgets/stats_widget.dart';
 
 class LandingPage extends StatelessWidget {
   const LandingPage({super.key});
@@ -12,72 +14,35 @@ class LandingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
     
+    final String first_name = authService.synQUser?.first_name ?? 'User';
+    final String last_name = authService.synQUser?.last_name ?? '';
+
     return Scaffold(
-      backgroundColor: Colors.grey.shade50,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Text(
-            'Court SynQ',
-            style: TextStyle(
-              color: Colors.purple.shade700,
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications_outlined),
-            onPressed: () {},
-            color: Colors.grey.shade700,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Row(
-              children: [
-                const CircleAvatar(
-                  radius: 18,
-                  child: Icon(Icons.person),
-                ),
-                const SizedBox(width: 8),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      authService.user?.email?.split('@')[0] ?? 'User',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 14,
-                      ),
-                    ),
-                    const Text(
-                      'Admin',
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
+      backgroundColor: Colors.white,
+      appBar: AppHeader(),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(24.0),
+        padding: const EdgeInsets.only(
+          top: 24,
+          left: 100,
+          right: 100,
+          bottom: 48,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Good Afternoon ${authService.user?.email?.split('@')[0] ?? 'User'},',
-              style: const TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.bold,
+            ShaderMask(
+              shaderCallback: (bounds) => const LinearGradient(
+                colors: [Color(0xFF6579E1), Color(0xFF754FA8)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ).createShader(Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
+              child: Text(
+                'Good Afternoon $first_name $last_name,',
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.white,
+                ),
               ),
             ),
             const SizedBox(height: 24),
@@ -85,39 +50,54 @@ class LandingPage extends StatelessWidget {
             Row(
               children: [
                 Expanded(
-                  child: _SummaryCard(
+                  child: StatsWidget(
                     title: "TODAY'S BOOKINGS",
-                    value: "12",
+                    count: "0",
                     icon: Icons.calendar_today,
-                    color: Colors.blue,
+                    backgroundColor: const Color(0xFFE4F0FF),
+                    iconBoxColor1: const Color(0xFF0974FE),
+                    iconBoxColor2: const Color(0xFF0051EA),
+                    titleColor: Colors.blue,
+                    countColor: const Color(0xFF16398E),
                   ),
                 ),
-                const SizedBox(width: 16),
+                const SizedBox(width: 10),
                 Expanded(
-                  child: _SummaryCard(
+                  child: StatsWidget(
                     title: "CONFIRMED BOOKINGS",
-                    value: "12",
+                    count: "12",
                     icon: Icons.check_circle,
-                    color: Colors.green,
+                    backgroundColor: Colors.green.shade100,
+                    iconBoxColor1: Colors.green.shade700,
+                    iconBoxColor2: Colors.green.shade900,
+                    titleColor: Colors.green.shade800,
+                    countColor: Colors.green.shade900,
                   ),
                 ),
-                const SizedBox(width: 16),
+                const SizedBox(width: 10),
                 Expanded(
-                  child: _SummaryCard(
+                  child: StatsWidget(
                     title: "PENDING PAYMENTS",
-                    value: "12",
-                    icon: Icons.access_time,
-                    color: Colors.orange,
+                    count: "12",
+                    icon: Icons.timeline,
+                    backgroundColor: const Color(0xFFFFF0DA),
+                    iconBoxColor1: const Color(0xFFFF8F01),
+                    iconBoxColor2: const Color(0xFFFC5E01),
+                    titleColor: const Color(0xFFE57200),
+                    countColor: const Color(0xFF7D3309),
                   ),
                 ),
-                const SizedBox(width: 16),
+                const SizedBox(width: 10),
                 Expanded(
-                  child: _SummaryCard(
+                  child: StatsWidget(
                     title: "TODAY'S REVENUE",
-                    value: "RS 15,000",
-                    icon: Icons.attach_money,
-                    color: Colors.purple,
-                    isRevenue: true,
+                    count: "RS 15,000",
+                    icon: Icons.payments,
+                    backgroundColor: const Color(0xFFF2EDFF),
+                    iconBoxColor1: const Color(0xFFA641FF),
+                    iconBoxColor2: const Color(0xFF7B1AEC),
+                    titleColor: const Color(0xFF9A0EF9),
+                    countColor: const Color(0xFF5A168B),
                   ),
                 ),
               ],
@@ -185,7 +165,7 @@ class LandingPage extends StatelessWidget {
                       description: 'Create and manage sports classes and training sessions',
                       badgeText: '2 Classes Starting Soon',
                       badgeColor: Colors.blue,
-                      backgroundImage: 'assets/images/court_booking_bkg.jpg',
+                      backgroundImage: 'assets/images/class_booking_bkg.jpg',
                       buttons: [
                         Button(
                           text: 'Create Class',
@@ -322,70 +302,70 @@ class LandingPage extends StatelessWidget {
   }
 }
 
-class _SummaryCard extends StatelessWidget {
-  final String title;
-  final String value;
-  final IconData icon;
-  final Color color;
-  final bool isRevenue;
+// class _SummaryCard extends StatelessWidget {
+//   final String title;
+//   final String value;
+//   final IconData icon;
+//   final Color color;
+//   final bool isRevenue;
 
-  const _SummaryCard({
-    required this.title,
-    required this.value,
-    required this.icon,
-    required this.color,
-    this.isRevenue = false,
-  });
+//   const _SummaryCard({
+//     required this.title,
+//     required this.value,
+//     required this.icon,
+//     required this.color,
+//     this.isRevenue = false,
+//   });
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: color.withOpacity(0.3)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                  color: color,
-                ),
-              ),
-              Icon(icon, color: color, size: 24),
-            ],
-          ),
-          const SizedBox(height: 12),
-          if (isRevenue) ...[
-            const Text(
-              'LKR',
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.grey,
-              ),
-            ),
-          ],
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: isRevenue ? 20 : 28,
-              fontWeight: FontWeight.bold,
-              color: color,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       padding: const EdgeInsets.all(20),
+//       decoration: BoxDecoration(
+//         color: color.withOpacity(0.1),
+//         borderRadius: BorderRadius.circular(12),
+//         border: Border.all(color: color.withOpacity(0.3)),
+//       ),
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: [
+//           Row(
+//             mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//             children: [
+//               Text(
+//                 title,
+//                 style: TextStyle(
+//                   fontSize: 12,
+//                   fontWeight: FontWeight.bold,
+//                   color: color,
+//                 ),
+//               ),
+//               Icon(icon, color: color, size: 24),
+//             ],
+//           ),
+//           const SizedBox(height: 12),
+//           if (isRevenue) ...[
+//             const Text(
+//               'LKR',
+//               style: TextStyle(
+//                 fontSize: 12,
+//                 color: Colors.grey,
+//               ),
+//             ),
+//           ],
+//           Text(
+//             value,
+//             style: TextStyle(
+//               fontSize: isRevenue ? 20 : 28,
+//               fontWeight: FontWeight.bold,
+//               color: color,
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
 class _ScheduleCard extends StatelessWidget {
   final String name;

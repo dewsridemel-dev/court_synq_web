@@ -4,6 +4,7 @@ import '../widgets/booking_slot.dart';
 import '../widgets/booking_dialog.dart';
 import '../models/court.dart';
 import '../widgets/date_selector.dart';
+import '../widgets/stats_widget.dart';
 
 /// Displays an hourly court booking schedule. Columns = courts, rows = hours.
 class CourtBookingSchedule extends StatelessWidget {
@@ -92,12 +93,55 @@ class CourtBookingSchedule extends StatelessWidget {
               const SizedBox(height: 8),
               Row(
                 children: [
-                  Text(
-                    'To be develop',
-                    style: TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.w600,
-                      color: Color(0xFF5A5A5A),
+                  Expanded(
+                    child: StatsWidget(
+                      title: "TODAY'S BOOKINGS",
+                      count: "0",
+                      icon: Icons.calendar_today,
+                      backgroundColor: const Color(0xFFE4F0FF),
+                      iconBoxColor1: const Color(0xFF0974FE),
+                      iconBoxColor2: const Color(0xFF0051EA),
+                      titleColor: Colors.blue,
+                      countColor: const Color(0xFF16398E),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: StatsWidget(
+                      title: "CONFIRMED BOOKINGS",
+                      count: "12",
+                      icon: Icons.check_circle,
+                      backgroundColor: Colors.green.shade100,
+                      iconBoxColor1: Colors.green.shade700,
+                      iconBoxColor2: Colors.green.shade900,
+                      titleColor: Colors.green.shade800,
+                      countColor: Colors.green.shade900,
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: StatsWidget(
+                      title: "PENDING PAYMENTS",
+                      count: "12",
+                      icon: Icons.timeline,
+                      backgroundColor: const Color(0xFFFFF0DA),
+                      iconBoxColor1: const Color(0xFFFF8F01),
+                      iconBoxColor2: const Color(0xFFFC5E01),
+                      titleColor: const Color(0xFFE57200),
+                      countColor: const Color(0xFF7D3309),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: StatsWidget(
+                      title: "TODAY'S REVENUE",
+                      count: "RS 15,000",
+                      icon: Icons.payments,
+                      backgroundColor: const Color(0xFFF2EDFF),
+                      iconBoxColor1: const Color(0xFFA641FF),
+                      iconBoxColor2: const Color(0xFF7B1AEC),
+                      titleColor: const Color(0xFF9A0EF9),
+                      countColor: const Color(0xFF5A168B),
                     ),
                   ),
                 ],

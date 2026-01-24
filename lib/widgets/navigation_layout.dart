@@ -51,7 +51,7 @@ class _NavigationLayoutState extends State<NavigationLayout> {
               height: MediaQuery.of(context).size.height,
               child: Column(
                 children: [
-                  const AppHeader(),
+                  const AppHeader(showLogo: false),
                   Expanded(
                     child: NavigationPageView(
                       currentRoute: _currentRoute,
@@ -83,7 +83,7 @@ class _NavigationLayoutState extends State<NavigationLayout> {
               Expanded(
                 child: Column(
                   children: [
-                    const AppHeader(),
+                    const AppHeader(showLogo: false),
                     Expanded(
                       child: NavigationPageView(
                         currentRoute: _currentRoute,
