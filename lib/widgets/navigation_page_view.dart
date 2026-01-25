@@ -1,5 +1,5 @@
 import 'package:court_synq_web/models/court_booking.dart';
-import 'package:court_synq_web/widgets/booking_dialog.dart';
+import 'package:court_synq_web/widgets/dialog/booking_dialog.dart';
 import 'package:flutter/material.dart';
 import '../pages/court_details_page.dart';
 import '../pages/court_booking_schedule.dart';

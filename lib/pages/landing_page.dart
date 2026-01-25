@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../services/auth_service.dart';
-import '../widgets/booking_dialog.dart';
+import '../widgets/dialog/booking_dialog.dart';
 import '../widgets/management_card.dart';
 import '../widgets/button.dart';
 import '../widgets/app_header.dart';
@@ -234,7 +234,7 @@ class LandingPage extends StatelessWidget {
                       description: 'Create and manage sports classes and training sessions',
                       badgeText: '2 Classes Starting Soon',
                       badgeColor: Colors.blue,
-                      backgroundImage: 'assets/images/court_booking_bkg.jpg',
+                      backgroundImage: 'assets/images/class_booking_bkg.jpg',
                       buttons: [
                         Button(
                           text: 'Create Class',

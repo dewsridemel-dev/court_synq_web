@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/court_booking.dart';
 import 'booking_slot.dart';
-import 'booking_dialog.dart';
+import 'dialog/booking_dialog.dart';
 
 /// Displays an hourly court booking schedule. Columns = courts, rows = hours.
 /// Data is driven by [courts] and [bookings] arrays.
