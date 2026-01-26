@@ -12,6 +12,8 @@ class Court {
   final String imageUrl;
   final int maxPlayers;
   final int minHours;
+  final List<String> sports;
+  final double ratePerHour;
   final bool isActive;
 
   const Court({
@@ -22,6 +24,8 @@ class Court {
     required this.imageUrl,
     required this.maxPlayers,
     required this.minHours,
+    required this.sports,
+    required this.ratePerHour,
     required this.isActive,
   });
 }

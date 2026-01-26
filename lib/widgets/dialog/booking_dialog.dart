@@ -4,6 +4,7 @@ import 'package:country_code_picker/country_code_picker.dart';
 import 'package:intl/intl.dart';
 import '../../services/supabase_service.dart';
 import '../../models/court_booking.dart';
+import '../button/primary_button.dart';
 
 class BookingDialog extends StatefulWidget {
   final String? courtId;
@@ -48,8 +49,8 @@ class _BookingDialogState extends State<BookingDialog> {
   bool _isLoading = false;
 
   // Default values - these would come from the selected booking slot
-  final String _defaultCourtId = ''; // court_1
-  final double _defaultHourlyRate = 0; // 1500.00
+  final String _defaultCourtId = '1'; // court_1
+  final double _defaultHourlyRate = 1500.00; // 1500.00
   final String _defaultTimeSlot = ''; // 09:00 - 10:00
 
   @override
@@ -438,7 +439,7 @@ class _BookingDialogState extends State<BookingDialog> {
                                   ),
                                   Text(
                                     'Rs ${NumberFormat('#,##0.00').format(hourlyRate)}/hr',
-                                    style: const TextStyle(color: Color(0xFF63748B), fontSize: 14, fontWeight: FontWeight.w600),
+                                    style: const TextStyle(color: Color(0xFF262626), fontSize: 14, fontWeight: FontWeight.w600),
                                   ),
                                 ],
                               ),
@@ -446,10 +447,13 @@ class _BookingDialogState extends State<BookingDialog> {
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  const Text('Duration '), // ($timeSlot)
+                                  const Text(
+                                    'Duration ',
+                                    style: TextStyle(color: Color(0xFF63748B), fontSize: 14, fontWeight: FontWeight.w600),  
+                                  ), // ($timeSlot)
                                   Text(
                                     durationText,
-                                    style: const TextStyle(color: Color(0xFF63748B), fontSize: 14, fontWeight: FontWeight.w600),
+                                    style: const TextStyle(color: Color(0xFF262626), fontSize: 14, fontWeight: FontWeight.w600),
                                   ),
                                 ],
                               ),
@@ -460,8 +464,9 @@ class _BookingDialogState extends State<BookingDialog> {
                                   const Text(
                                     'Total',
                                     style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.w600,
+                                      color: Color(0xFF262626)
                                     ),
                                   ),
                                   Text(
@@ -469,7 +474,7 @@ class _BookingDialogState extends State<BookingDialog> {
                                     style: const TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.purple,
+                                      color: Color(0xFF313D4F),
                                     ),
                                   ),
                                 ],
@@ -477,7 +482,7 @@ class _BookingDialogState extends State<BookingDialog> {
                             ],
                           ),
                         ),
-                        const SizedBox(height: 32),
+                        const SizedBox(height: 20),
                         // Payment Method
                         const Text(
                           'Select payment method',
@@ -487,7 +492,7 @@ class _BookingDialogState extends State<BookingDialog> {
                             color: Color(0xFF262626),
                           ),
                         ),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 10),
                         _PaymentMethodOption(
                           title: 'Credit/debit Card',
                           value: 'card',
@@ -498,7 +503,7 @@ class _BookingDialogState extends State<BookingDialog> {
                             });
                           },
                         ),
-                        const SizedBox(height: 8),
+                        const SizedBox(height: 5),
                         _PaymentMethodOption(
                           title: 'Fund transfer',
                           value: 'transfer',
@@ -509,7 +514,7 @@ class _BookingDialogState extends State<BookingDialog> {
                             });
                           },
                         ),
-                        const SizedBox(height: 8),
+                        const SizedBox(height: 5),
                         _PaymentMethodOption(
                           title: 'Cash payment',
                           value: 'cash',
@@ -520,7 +525,7 @@ class _BookingDialogState extends State<BookingDialog> {
                             });
                           },
                         ),
-                        const SizedBox(height: 32),
+                        const SizedBox(height: 20),
                         // Payment Status
                         const Text(
                           'Payment status',
@@ -530,9 +535,16 @@ class _BookingDialogState extends State<BookingDialog> {
                             color: Color(0xFF262626),
                           ),
                         ),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 10),
                         CheckboxListTile(
-                          title: const Text('Mark as paid'),
+                          title: const Text(
+                            'Mark as paid',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: Color(0xD9000000),
+                            ),
+                          ),
                           value: _isPaid,
                           onChanged: (value) {
                             setState(() {
@@ -560,38 +572,28 @@ class _BookingDialogState extends State<BookingDialog> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  OutlinedButton(
-                    onPressed: _isLoading ? null : () => Navigator.of(context).pop(),
-                    style: OutlinedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 32,
-                        vertical: 12,
-                      ),
-                      side: BorderSide(color: Colors.grey.shade300),
-                    ),
-                    child: const Text('Previous'),
+                  PrimaryButton(
+                    text: 'Previous',
+                    onPressed: () => Navigator.of(context).pop(),
+                    backgroundColor1: Color(0xFFFFFFFF),
+                    backgroundColor2: Color(0xFFFFFFFF),
+                    textColor: Color(0xFF000000),
+                    borderColor: Color(0xFF7256B1),
+                    height: 30,
+                    width: 145,
+                    isLoading: _isLoading,
                   ),
-                  const SizedBox(width: 16),
-                  ElevatedButton(
-                    onPressed: _isLoading ? null : _handleConfirm,
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.purple,
-                      foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 32,
-                        vertical: 12,
-                      ),
-                    ),
-                    child: _isLoading
-                        ? const SizedBox(
-                            width: 20,
-                            height: 20,
-                            child: CircularProgressIndicator(
-                              strokeWidth: 2,
-                              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                            ),
-                          )
-                        : const Text('Confirm'),
+                  const SizedBox(width: 40),
+                  PrimaryButton(
+                    text: 'Confirm',
+                    onPressed: _handleConfirm,
+                    backgroundColor1: Color(0xFF6775DC),
+                    backgroundColor2: Color(0xFF7256B1),
+                    textColor: Colors.white,
+                    borderColor: Color(0xFFCCCCCC),
+                    height: 30,
+                    width: 370,
+                    isLoading: _isLoading,
                   ),
                 ],
               ),
@@ -619,7 +621,14 @@ class _PaymentMethodOption extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RadioListTile<String>(
-      title: Text(title),
+      title: Text(
+        title,
+        style: const TextStyle(
+          fontSize: 14,
+          fontWeight: FontWeight.w400,
+          color: Color(0xD9000000),
+        ),
+      ),
       value: value,
       groupValue: groupValue,
       onChanged: (value) {

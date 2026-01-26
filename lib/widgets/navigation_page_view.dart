@@ -21,11 +21,11 @@ class NavigationPageView extends StatelessWidget {
 
     // Test
     final List<Court> courtList = [
-      const Court(id: "1", name: "Court A", imageUrl: "assets/images/test.jfif", description: "Test Desc.", maxPlayers: 4, minHours: 1, isActive: true, referenceNumber: "REF001"),
-      const Court(id: "2", name: "Cricket Court", imageUrl: "assets/images/test.jfif", description: "This is our cricket court", maxPlayers: 4, minHours: 1, isActive: true, referenceNumber: "REF002"),
-      const Court(id: "3", name: "Tennis Court", imageUrl: "assets/images/test.jfif", description: "", maxPlayers: 4, minHours: 1, isActive: true, referenceNumber: "REF003"),
-      const Court(id: "4", name: "Swimming Pool", imageUrl: "assets/images/test.jfif", description: "", maxPlayers: 4, minHours: 1, isActive: true, referenceNumber: "REF004"),
-      const Court(id: "5", name: "Court C", imageUrl: "assets/images/test.jfif", description: "", maxPlayers: 4, minHours: 1, isActive: true, referenceNumber: "REF005")
+      const Court(id: "1", name: "Court A", imageUrl: "assets/images/default/default_court.jpeg", description: "Test Desc.", maxPlayers: 4, minHours: 1, isActive: true, referenceNumber: "REF001", sports: ['Futsal', 'Cricket', 'Netball'], ratePerHour: 1500.0),
+      const Court(id: "2", name: "Cricket Court", imageUrl: "assets/images/default/default_court.jpeg", description: "This is our cricket court", maxPlayers: 4, minHours: 1, isActive: true, referenceNumber: "REF002", sports: ['Futsal', 'Cricket', 'Netball'], ratePerHour: 1500.0),
+      const Court(id: "3", name: "Tennis Court", imageUrl: "assets/images/default/default_court.jpeg", description: "", maxPlayers: 4, minHours: 1, isActive: true, referenceNumber: "REF003", sports: ['Futsal', 'Cricket', 'Netball'], ratePerHour: 1500.0),
+      const Court(id: "4", name: "Swimming Pool", imageUrl: "assets/images/default/default_court.jpeg", description: "", maxPlayers: 4, minHours: 1, isActive: true, referenceNumber: "REF004", sports: ['Futsal', 'Cricket', 'Netball'], ratePerHour: 1500.0),
+      const Court(id: "5", name: "Court C", imageUrl: "assets/images/default/default_court.jpeg", description: "", maxPlayers: 4, minHours: 1, isActive: true, referenceNumber: "REF005", sports: ['Futsal', 'Cricket', 'Netball'], ratePerHour: 1500.0)
     ];
 
     final List<Booking> bookingList = [
@@ -83,7 +83,7 @@ class NavigationPageView extends StatelessWidget {
 
   Widget _buildPlaceholderPage(String title, String subtitle) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade50,
+      backgroundColor: Color(0xFFFFFFFF),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import '../services/auth_service.dart';
 import '../widgets/dialog/booking_dialog.dart';
 import '../widgets/management_card.dart';
-import '../widgets/button.dart';
+import '../widgets/button/button.dart';
 import '../widgets/app_header.dart';
 import '../widgets/stats_widget.dart';
 
@@ -131,7 +131,7 @@ class LandingPage extends StatelessWidget {
                       title: 'Court Reservation Management',
                       description: 'Book courts, manage availability, and handle customer reservations',
                       badgeText: '3 Pending Approvals',
-                      badgeColor: Colors.yellow,
+                      badgeColor: Color(0xD6FFCC00),
                       backgroundImage: 'assets/images/court_booking_bkg.jpg',
                       buttons: [
                         Button(

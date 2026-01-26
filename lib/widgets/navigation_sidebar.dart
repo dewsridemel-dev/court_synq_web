@@ -254,7 +254,7 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
             child: Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.all(10),
+                  padding: const EdgeInsets.all(7),
                   decoration: BoxDecoration(
                     color: isSelected && !hasChildren
                         ? Color(0xFF6E73F1)

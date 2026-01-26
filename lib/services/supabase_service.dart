@@ -22,7 +22,7 @@ class SupabaseService {
   }) async {
     try {
       final response = await _client
-          .from('bookings')
+          .from('booking.synq_booking')
           .insert({
             'first_name': firstName,
             'last_name': lastName,
@@ -53,7 +53,7 @@ class SupabaseService {
   Future<List<Map<String, dynamic>>> getUserBookings() async {
     try {
       final response = await _client
-          .from('bookings')
+          .from('booking.synq_booking')
           .select()
           .order('created_at', ascending: false);
       
