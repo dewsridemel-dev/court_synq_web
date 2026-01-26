@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import '../models/court.dart';
 
 class CourtDetailsPage extends StatefulWidget {
   const CourtDetailsPage({super.key});
@@ -9,52 +10,19 @@ class CourtDetailsPage extends StatefulWidget {
 }
 
 class _CourtDetailsPageState extends State<CourtDetailsPage> {
-  final List<CourtData> _courts = [
-    CourtData(
-      name: 'Court A',
-      referenceNo: 'ID00001',
-      sports: ['Futsal', 'Cricket', 'Netball'],
-      ratePerHour: 1500.00,
-      maxPlayers: 10,
-      minHours: 2,
-      isActive: true,
-    ),
-    CourtData(
-      name: 'Court B',
-      referenceNo: 'ID00002',
-      sports: ['Futsal', 'Cricket', 'Netball'],
-      ratePerHour: 1500.00,
-      maxPlayers: 10,
+  final List<Court> _courts = [
+    Court(
+      id: "1",
+      name: "Court A",
+      imageUrl: "assets/images/default/default_court.jpeg",
+      description: "Test Desc.",
+      maxPlayers: 4,
       minHours: 1,
       isActive: true,
-    ),
-    CourtData(
-      name: 'Court C',
-      referenceNo: 'ID00002',
+      referenceNumber: "REF001",
       sports: ['Futsal', 'Cricket', 'Netball'],
-      ratePerHour: 1500.00,
-      maxPlayers: 10,
-      minHours: 1,
-      isActive: true,
-    ),
-    CourtData(
-      name: 'Court D',
-      referenceNo: 'ID00002',
-      sports: ['Futsal', 'Cricket', 'Netball'],
-      ratePerHour: 1500.00,
-      maxPlayers: 10,
-      minHours: 2,
-      isActive: true,
-    ),
-    CourtData(
-      name: 'Court E',
-      referenceNo: 'ID00002',
-      sports: ['Futsal', 'Cricket', 'Netball'],
-      ratePerHour: 1500.00,
-      maxPlayers: 10,
-      minHours: 1,
-      isActive: true,
-    ),
+      ratePerHour: 1500.0,
+    )
   ];
 
   @override
@@ -196,7 +164,7 @@ class _CourtDetailsPageState extends State<CourtDetailsPage> {
                 return DataRow(
                   cells: [
                     DataCell(Text(court.name)),
-                    DataCell(Text(court.referenceNo)),
+                    DataCell(Text(court.referenceNumber)),
                     DataCell(
                       Wrap(
                         spacing: 4,
@@ -214,15 +182,16 @@ class _CourtDetailsPageState extends State<CourtDetailsPage> {
                     DataCell(Text(court.maxPlayers.toString())),
                     DataCell(Text('${court.minHours} hour${court.minHours > 1 ? 's' : ''}')),
                     DataCell(
-                      Switch(
-                        value: court.isActive,
-                        onChanged: (value) {
-                          setState(() {
-                            court.isActive = value;
-                          });
-                        },
-                        activeColor: Colors.blue,
-                      ),
+                      Text(court.isActive ? 'Active' : 'Inactive'),
+                      // Switch(
+                      //   value: court.isActive,
+                      //   onChanged: (value) {
+                      //     setState(() {
+                      //       court.isActive = value;
+                      //     });
+                      //   },
+                      //   activeColor: Colors.blue,
+                      // ),
                     ),
                     DataCell(
                       Row(
@@ -280,19 +249,19 @@ class _CourtDetailsPageState extends State<CourtDetailsPage> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Switch(
-                      value: court.isActive,
-                      onChanged: (value) {
-                        setState(() {
-                          court.isActive = value;
-                        });
-                      },
-                      activeColor: Colors.blue,
-                    ),
+                    // Switch(
+                    //   value: court.isActive,
+                    //   onChanged: (value) {
+                    //     setState(() {
+                    //       court.isActive = value;
+                    //     });
+                    //   },
+                    //   activeColor: Colors.blue,
+                    // ),
                   ],
                 ),
                 const Divider(),
-                _buildMobileRow('Reference No', court.referenceNo),
+                _buildMobileRow('Reference No', court.referenceNumber),
                 _buildMobileRow('Sports', court.sports.join(', ')),
                 _buildMobileRow('Rate Per Hour', 'Rs ${NumberFormat('#,##0.00').format(court.ratePerHour)}'),
                 _buildMobileRow('Max Players', court.maxPlayers.toString()),
@@ -365,7 +334,7 @@ class _CourtDetailsPageState extends State<CourtDetailsPage> {
     );
   }
 
-  void _editCourt(CourtData court) {
+  void _editCourt(Court court) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -385,7 +354,7 @@ class _CourtDetailsPageState extends State<CourtDetailsPage> {
     );
   }
 
-  void _deleteCourt(CourtData court) {
+  void _deleteCourt(Court court) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
@@ -416,24 +385,4 @@ class _CourtDetailsPageState extends State<CourtDetailsPage> {
       ),
     );
   }
-}
-
-class CourtData {
-  String name;
-  String referenceNo;
-  List<String> sports;
-  double ratePerHour;
-  int maxPlayers;
-  int minHours;
-  bool isActive;
-
-  CourtData({
-    required this.name,
-    required this.referenceNo,
-    required this.sports,
-    required this.ratePerHour,
-    required this.maxPlayers,
-    required this.minHours,
-    required this.isActive,
-  });
 }

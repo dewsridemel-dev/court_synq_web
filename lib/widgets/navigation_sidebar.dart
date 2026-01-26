@@ -36,7 +36,7 @@ class NavigationSidebar extends StatefulWidget {
 
 class _NavigationSidebarState extends State<NavigationSidebar> {
   final Map<String, bool> _expandedItems = {
-    'Court Management': true,
+    'Court Management': false,
     'Facility Management': false,
     'Business Profile': false,
   };
@@ -63,7 +63,7 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
         ),
         NavigationItem(
           title: 'Pricing',
-          icon: Icons.price_tag_outlined,
+          icon: Icons.price_check,
           route: '/pricing',
         ),
       ],
@@ -86,7 +86,7 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
     ),
     NavigationItem(
       title: 'Business Profile',
-      icon: Icons.briefcase_outlined,
+      icon: Icons.business_center,
       children: [
         NavigationItem(
           title: 'Profile Settings',
@@ -142,7 +142,7 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
   Widget build(BuildContext context) {
     return Container(
       width: widget.isCollapsed ? 80 : 280,
-      color: Colors.grey.shade50,
+      color: Colors.white,
       child: Column(
         children: [
           // Logo and Toggle Button
@@ -161,31 +161,32 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
                 if (!widget.isCollapsed)
                   Row(
                     children: [
-                      ShaderMask(
-                        shaderCallback: (bounds) => LinearGradient(
-                          colors: [
-                            Colors.purple,
-                            Colors.pink,
-                          ],
-                        ).createShader(bounds),
-                        child: const Text(
-                          'Court SynQ',
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
+                      Container(
+                        width: 120,
+                        height: 28,
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                            image: AssetImage('assets/images/logo/logo_2x.png'),
+                            fit: BoxFit.fill,
                           ),
                         ),
-                      ),
+                      )
                     ],
                   )
                 else
-                  const Text(
-                    'C',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.purple,
+                  ShaderMask(
+                    shaderCallback: (bounds) => const LinearGradient(
+                      colors: [Color(0xFF6579E1), Color(0xFF754FA8)],
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                    ).createShader(Rect.fromLTWH(0, 0, bounds.width, bounds.height)),
+                    child: const Text(
+                      'C',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 IconButton(
@@ -205,7 +206,7 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
           // Navigation Items
           Expanded(
             child: ListView.builder(
-              padding: EdgeInsets.zero,
+              padding: !widget.isCollapsed ? EdgeInsets.only(top: 10, bottom: 10, left: 20, right: 20) : EdgeInsets.zero,
               itemCount: _navigationItems.length,
               itemBuilder: (context, index) {
                 return _buildNavigationItem(_navigationItems[index]);
@@ -234,20 +235,39 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
           },
           child: Container(
             padding: EdgeInsets.symmetric(
-              horizontal: widget.isCollapsed ? 12 : 20,
-              vertical: 16,
+              horizontal: widget.isCollapsed ? 10 : 15,
+              vertical: 10,
             ),
-            color: isSelected && !hasChildren
-                ? Colors.purple.shade50
-                : Colors.transparent,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(12),
+              gradient: LinearGradient(
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
+                colors: isSelected && !hasChildren
+                    ? [
+                        Color(0xFFD0D1FB), // Left color
+                        Color(0xFFF1F2FE), // Right color
+                      ]
+                    : [Colors.transparent, Colors.transparent],
+              ),
+            ),
             child: Row(
               children: [
-                Icon(
-                  item.icon,
-                  color: isSelected && !hasChildren
-                      ? Colors.purple
-                      : Colors.grey.shade700,
-                  size: 24,
+                Container(
+                  padding: const EdgeInsets.all(7),
+                  decoration: BoxDecoration(
+                    color: isSelected && !hasChildren
+                        ? Color(0xFF6E73F1)
+                        : Colors.transparent,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  child: Icon(
+                    item.icon,
+                    color: isSelected && !hasChildren
+                        ? Colors.white
+                        : Color(0xFF63748B),
+                    size: 20,
+                  ),
                 ),
                 if (!widget.isCollapsed) ...[
                   const SizedBox(width: 16),
@@ -256,11 +276,11 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
                       item.title,
                       style: TextStyle(
                         color: isSelected && !hasChildren
-                            ? Colors.purple
-                            : Colors.grey.shade700,
+                            ? Color(0xFF6E73F1)
+                            : Color(0xFF63748B),
                         fontWeight: isSelected && !hasChildren
-                            ? FontWeight.w600
-                            : FontWeight.normal,
+                            ? FontWeight.w700
+                            : FontWeight.w700,
                         fontSize: 14,
                       ),
                     ),
@@ -271,7 +291,7 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
                           ? Icons.keyboard_arrow_up
                           : Icons.keyboard_arrow_down,
                       size: 20,
-                      color: Colors.grey.shade600,
+                      color: Color(0xFF63748B),
                     ),
                 ],
               ],
@@ -296,7 +316,7 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
                 margin: const EdgeInsets.only(left: 40),
                 decoration: BoxDecoration(
                   color: isChildSelected
-                      ? Colors.purple.shade50
+                      ? Color(0xFFD0D1FB)
                       : Colors.transparent,
                   borderRadius: BorderRadius.circular(8),
                 ),
@@ -305,8 +325,8 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
                     Icon(
                       child.icon,
                       color: isChildSelected
-                          ? Colors.purple
-                          : Colors.grey.shade600,
+                          ? Color(0xFF6E73F1)
+                          : Color(0xFF63748B),
                       size: 20,
                     ),
                     const SizedBox(width: 12),
@@ -315,8 +335,8 @@ class _NavigationSidebarState extends State<NavigationSidebar> {
                         child.title,
                         style: TextStyle(
                           color: isChildSelected
-                              ? Colors.purple
-                              : Colors.grey.shade700,
+                              ? Color(0xFF6E73F1)
+                              : Color(0xFF63748B),
                           fontWeight: isChildSelected
                               ? FontWeight.w600
                               : FontWeight.normal,

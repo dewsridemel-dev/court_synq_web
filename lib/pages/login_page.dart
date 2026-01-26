@@ -58,117 +58,22 @@ class _LoginPageState extends State<LoginPage> {
         children: [
           // Left side - Marketing section
           Expanded(
-            flex: 1,
+            flex: 3,
             child: Container(
               width: double.infinity,
               height: double.infinity,
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/images/login_image.png'),
-                  fit: BoxFit.cover,
+                  fit: BoxFit.fill,
                 ),
               ),
             )
           ),
-          /*Expanded(
-            flex: 1,
-            child: Container(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [
-                    Colors.purple.shade700,
-                    Colors.purple.shade500,
-                  ],
-                ),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(48.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Text(
-                      'Court SynQ',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 32,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 60),
-                    const Text(
-                      'Organize. Schedule. Control.',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 48,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    const Text(
-                      'Make Smart Decisions! Set clear timelines for projects and celebrate your achievements!',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                      ),
-                    ),
-                    const SizedBox(height: 40),
-                    Row(
-                      children: [
-                        Container(
-                          width: 12,
-                          height: 12,
-                          decoration: const BoxDecoration(
-                            color: Colors.white,
-                            shape: BoxShape.circle,
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Container(
-                          width: 12,
-                          height: 12,
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.5),
-                            shape: BoxShape.circle,
-                          ),
-                        ),
-                        const SizedBox(width: 8),
-                        Container(
-                          width: 12,
-                          height: 12,
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.5),
-                            shape: BoxShape.circle,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const Spacer(),
-                    // Placeholder for image - you can add an actual image here
-                    Container(
-                      height: 300,
-                      decoration: BoxDecoration(
-                        color: Colors.white.withOpacity(0.1),
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: const Center(
-                        child: Icon(
-                          Icons.sports_tennis,
-                          size: 100,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),*/
-
+          
           // Right side - Login form
           Expanded(
-            flex: 1,
+            flex: 4,
             child: Container(
               color: Colors.white,
               child: Center(
@@ -199,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
                               fontWeight: FontWeight.w400,
                             ),
                           ),
-                          const SizedBox(height: 48),
+                          const SizedBox(height: 30),
                           TextFormField(
                             controller: _usernameController,
                             decoration: InputDecoration(
@@ -261,7 +166,7 @@ class _LoginPageState extends State<LoginPage> {
                                         _rememberMe = value ?? true;
                                       });
                                     },
-                                    activeColor: const Color(0xFF0F172A),
+                                    activeColor: const Color(0xFF4045EF),
                                     checkColor: Colors.white,
                                   ),
                                   const Text('Remember me'),
@@ -271,53 +176,77 @@ class _LoginPageState extends State<LoginPage> {
                                 onPressed: () {
                                   // Handle forgot password
                                 },
-                                child: const Text('Forgot Password?'),
+                                child: const Text('Forgot Password?', style: TextStyle(
+                                  color: Color(0xFF4045EF)
+                                ),),
                               ),
                             ],
                           ),
-                          const SizedBox(height: 32),
+                          const SizedBox(height: 30),
                           SizedBox(
                             height: 50,
-                            child: ElevatedButton(
-                              onPressed: authService.isLoading ? null : _handleSignIn,
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color(0xFF6B7FD7),
-                                foregroundColor: Colors.white,
-                                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                gradient: const LinearGradient(
+                                  colors: [
+                                    Color(0xFF6972D8),
+                                    Color(0xFF705CB8),
+                                  ],
                                 ),
-                                minimumSize: const Size(double.infinity, 56),
-                                elevation: 3,
                               ),
-                              child: authService.isLoading
-                                  ? const SizedBox(
-                                      height: 20,
-                                      width: 20,
-                                      child: CircularProgressIndicator(
-                                        strokeWidth: 2,
-                                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                              child: ElevatedButton(
+                                onPressed: authService.isLoading ? null : _handleSignIn,
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: Colors.transparent,
+                                  shadowColor: Colors.transparent,
+                                  padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  minimumSize: const Size(double.infinity, 56),
+                                  elevation: 3,
+                                ),
+                                child: authService.isLoading
+                                    ? const SizedBox(
+                                        height: 20,
+                                        width: 20,
+                                        child: CircularProgressIndicator(
+                                          strokeWidth: 2,
+                                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                        ),
+                                      )
+                                    : const Text(
+                                        'Sign In',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white
+                                        ),
                                       ),
-                                    )
-                                  : const Text(
-                                      'Sign In',
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
+                              ),
                             ),
                           ),
                           const SizedBox(height: 24),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Text("Don't have an account? "),
+                              const Text("Don't have an account?",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: 14.0,
+                                color: Color(0xFF0F172A)
+                              )),
                               TextButton(
                                 onPressed: () {
                                   // Handle sign up
                                 },
-                                child: const Text('Sign Up'),
+                                child: const Text('Sign Up',
+                                  style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 14.0,
+                                  color: Color(0xFF4045EF)
+                                )),
                               ),
                             ],
                           ),

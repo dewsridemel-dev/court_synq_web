@@ -1,15 +1,22 @@
 import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../models/user.dart';
 
 class AuthService extends ChangeNotifier {
   final SupabaseClient _client = Supabase.instance.client;
   User? _user;
+  SynQUser? _synQUser;
   bool _isLoading = false;
 
   User? get user => _user;
+  SynQUser? get synQUser => _synQUser;
   bool get isLoading => _isLoading;
   bool get isAuthenticated => _user != null;
+
+  void setUser(SynQUser user) {
+    _synQUser = user;
+  }
 
   AuthService() {
     _user = _client.auth.currentUser;
@@ -31,9 +38,29 @@ class AuthService extends ChangeNotifier {
         email: username, // or query users table to get email from username
         password: password,
       );
-
+      
       if (response.user != null) {
-        _user = response.user;
+        // Get User Details from profiles table
+        final Map<String, dynamic> userResponce = await _client
+            .from('synq_user')
+            .select('''
+              id,
+              user_id,
+              first_name,
+              last_name,
+              phone_number,
+              email,
+              designation,
+              is_active,
+              is_business_owner,
+              created_at
+            ''')
+            .eq('id', response.user!.id)
+            .single();
+
+        _synQUser = SynQUser.fromMap(userResponce);
+        setUser(_synQUser!);
+        
         final prefs = await SharedPreferences.getInstance();
         await prefs.setString('supabase_session', response.session?.accessToken ?? '');
         _isLoading = false;
@@ -56,6 +83,7 @@ class AuthService extends ChangeNotifier {
     try {
       await _client.auth.signOut();
       _user = null;
+      _synQUser = null;
       final prefs = await SharedPreferences.getInstance();
       await prefs.remove('supabase_session');
       notifyListeners();
