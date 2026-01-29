@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../models/user.dart';
+import '../../data/models/user.dart';
 
 class AuthService extends ChangeNotifier {
   final SupabaseClient _client = Supabase.instance.client;

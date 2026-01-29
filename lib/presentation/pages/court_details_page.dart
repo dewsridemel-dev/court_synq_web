@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../models/court.dart';
+import '../../data/models/court.dart';
 
 class CourtDetailsPage extends StatefulWidget {
   const CourtDetailsPage({super.key});

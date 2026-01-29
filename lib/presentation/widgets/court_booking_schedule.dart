@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../models/court_booking.dart';
+import '../../data/models/court_booking.dart';
+import '../../data/models/court.dart';
 import 'booking_slot.dart';
 import 'dialog/booking_dialog.dart';
 

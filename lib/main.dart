@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'services/supabase_service.dart';
-import 'services/auth_service.dart';
-import 'pages/login_page.dart';
-import 'pages/landing_page.dart';
+import '../domain/services/supabase_service.dart';
+import '../domain/services/auth_service.dart';
+import '../presentation/pages/login_page.dart';
+import '../presentation/pages/landing_page.dart';
 import 'configs/config.dart';
 
 void main() async {

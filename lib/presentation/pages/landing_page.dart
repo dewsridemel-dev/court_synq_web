@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../services/auth_service.dart';
+import '../../domain/services/auth_service.dart';
 import '../widgets/dialog/booking_dialog.dart';
 import '../widgets/management_card.dart';
 import '../widgets/button/button.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../models/court_booking.dart';
+import '../../data/models/court_booking.dart';
 import 'dialog/booking_dialog.dart';
-import '../models/court.dart';
+import '../../data/models/court.dart';
 
 const double _rowHeight = 80;
 

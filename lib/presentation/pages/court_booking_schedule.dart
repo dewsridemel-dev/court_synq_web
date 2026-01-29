@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import '../models/court_booking.dart';
+import '../../data/models/court_booking.dart';
 import '../widgets/booking_slot.dart';
 import '../widgets/dialog/booking_dialog.dart';
-import '../models/court.dart';
+import '../../data/models/court.dart';
 import '../widgets/date_selector.dart';
 import '../widgets/stats_widget.dart';
 

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:intl/intl.dart';
-import '../../services/supabase_service.dart';
-import '../../models/court_booking.dart';
+import '../../../domain/services/supabase_service.dart';
+import '../../../data/models/court_booking.dart';
 import '../button/primary_button.dart';
 
 class BookingDialog extends StatefulWidget {
