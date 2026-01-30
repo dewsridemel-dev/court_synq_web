@@ -7,7 +7,7 @@ import '../widgets/date_selector.dart';
 import '../widgets/stats_widget.dart';
 
 /// Displays an hourly court booking schedule. Columns = courts, rows = hours.
-class CourtBookingSchedule extends StatelessWidget {
+class Dashboard extends StatelessWidget {
   final List<Court> courts;
   final List<Booking> bookings;
 
@@ -15,7 +15,7 @@ class CourtBookingSchedule extends StatelessWidget {
   final int endHour;
   final OnBookingSubmit? onBookingAdded;
 
-  const CourtBookingSchedule({
+  const Dashboard({
     super.key,
     required this.courts,
     required this.bookings,

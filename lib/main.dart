@@ -37,11 +37,18 @@ class MyApp extends StatelessWidget {
         title: 'Court SynQ',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.purple,
+          // Use Material 3, which is the default from Flutter 3.16+
           useMaterial3: true,
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: Colors.purple,
-            brightness: Brightness.light,
+          colorScheme: ColorScheme.light(
+            primary: Colors.white,
+            onPrimary: Colors.black,
+            background: Colors.white,
+            surface: Colors.white,
+          ),
+
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Colors.white,
+            foregroundColor: Colors.black,
           ),
         ),
         home: const AuthWrapper(),

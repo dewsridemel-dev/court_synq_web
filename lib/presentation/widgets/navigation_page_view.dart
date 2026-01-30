@@ -2,8 +2,9 @@ import 'package:court_synq_web/data/models/court_booking.dart';
 import 'package:court_synq_web/presentation/widgets/dialog/booking_dialog.dart';
 import 'package:flutter/material.dart';
 import '../pages/court_details_page.dart';
-import '../pages/court_booking_schedule.dart';
+import '../pages/dashboard_page.dart';
 import '../../data/models/court.dart';
+import '../pages/business_detail_page.dart';
 
 class NavigationPageView extends StatelessWidget {
   final String currentRoute;
@@ -36,7 +37,7 @@ class NavigationPageView extends StatelessWidget {
 
     switch (currentRoute) {
       case '/dashboard':
-        pageContent = CourtBookingSchedule(courts: courtList, bookings: bookingList);
+        pageContent = Dashboard(courts: courtList, bookings: bookingList);
         break;
       case '/court-details':
         pageContent = const CourtDetailsPage();
@@ -54,7 +55,7 @@ class NavigationPageView extends StatelessWidget {
         pageContent = _buildPlaceholderPage('Equipment', 'Manage equipment');
         break;
       case '/profile-settings':
-        pageContent = _buildPlaceholderPage('Profile Settings', 'Configure profile');
+        pageContent = const BusinessDetailPage();
         break;
       case '/business-info':
         pageContent = _buildPlaceholderPage('Business Info', 'Business information');
