@@ -136,11 +136,11 @@ class _BusinessDetailPageState extends State<BusinessDetailPage> {
   }
 
   void _showBusinessDialog() {
-    BusinessDialog(
-      title: 'Add Court',
-      message: 'Court addition form will be implemented here.',
-      confirmText: 'Add',
-      cancelText: 'Cancel',
+    showDialog(
+      context: context,
+      builder: (context) => 
+        BusinessDialog()
+      ,
     );
   }
 
