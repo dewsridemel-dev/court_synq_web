@@ -45,31 +45,39 @@ class PrimaryButton extends StatelessWidget {
                     width: .5,
                 ),
             ),
-            child: ElevatedButton(
-                onPressed: onPressed,
-                style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.transparent,
-                    shadowColor: Colors.transparent,
-                    elevation: 3,
-                ),
-                child: isLoading == true
-                ? SizedBox(
-                    height: height ?? 30,
-                    width: width ?? 30,
-                    child: CircularProgressIndicator(
-                        strokeWidth: 2,
-                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+            child: Row(
+                children: [
+                    if (icon != null) ...[
+                        Icon(icon),
+                        const SizedBox(width: 8),
+                    ],
+                    ElevatedButton(
+                        onPressed: onPressed,
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.transparent,
+                            shadowColor: Colors.transparent,
+                            elevation: 3,
+                        ),
+                        child: isLoading == true
+                        ? SizedBox(
+                            height: height ?? 30,
+                            width: width ?? 30,
+                            child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                            ),
+                            )
+                        : Text(
+                            text,
+                            style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                color: textColor ?? Colors.white
+                            ),
+                        ),
                     ),
-                    )
-                : Text(
-                    text,
-                    style: TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                        color: textColor ?? Colors.white
-                    ),
-                ),
-            ),
+                ]
+            )
         ),
     );
   }

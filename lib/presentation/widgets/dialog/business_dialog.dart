@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
+import '../button/primary_button.dart';
 
 class BusinessDialog extends StatefulWidget {
   const BusinessDialog({Key? key}) : super(key: key);
@@ -60,8 +61,8 @@ class _BusinessDialogState extends State<BusinessDialog> {
             backgroundColor: Colors.white,
             elevation: 0,
             leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.black),
-            onPressed: () => Navigator.pop(context),
+              icon: const Icon(Icons.arrow_back, color: Colors.black),
+              onPressed: () => Navigator.pop(context),
             ),
         ),
         body: SingleChildScrollView(
@@ -73,44 +74,65 @@ class _BusinessDialogState extends State<BusinessDialog> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                     // Header
-                    const Text(
-                    'Business Information',
-                    style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                    ),
-                    ),
-                    const SizedBox(height: 4),
-                    const Text(
-                    'Update your business details',
-                    style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey,
-                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(
+                            color: Color(0x40BFBCBC), // 25% opacity
+                            width: 2.0,
+                          ),
+                        ),
+                      ),
+                      child: Row(
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Business Documents',
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black,
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              const Text(
+                                'Upload and manage your business registration and tax documents',
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    color: Color(0xFF63748B),
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                            ]
+                          )
+                        ]
+                      )
                     ),
                     const SizedBox(height: 32),
 
                     // Business Name and Registration Number Row
                     Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                        Expanded(
-                        child: _buildTextField(
-                            label: 'Business Name',
-                            controller: _businessNameController,
-                            isRequired: true,
-                        ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                        child: _buildTextField(
-                            label: 'Business Registration Number',
-                            controller: _registrationNumberController,
-                            hintText: 'Enter business registration number',
-                        ),
-                        ),
-                    ],
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                          Expanded(
+                          child: _buildTextField(
+                              label: 'Business Name',
+                              controller: _businessNameController,
+                              isRequired: true,
+                          ),
+                          ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                          child: _buildTextField(
+                              label: 'Business Registration Number',
+                              controller: _registrationNumberController,
+                              hintText: 'Enter business registration number',
+                          ),
+                          ),
+                      ],
                     ),
                     const SizedBox(height: 20),
 
@@ -168,43 +190,61 @@ class _BusinessDialogState extends State<BusinessDialog> {
                     const SizedBox(height: 40),
 
                     // Business Documents Section
-                    const Text(
-                    'Business Documents',
-                    style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.black,
-                    ),
-                    ),
-                    const SizedBox(height: 4),
-                    const Text(
-                    'Upload and manage your business registration and tax documents',
-                    style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.grey,
-                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border(
+                          bottom: BorderSide(
+                            color: Color(0x40BFBCBC), // 25% opacity
+                            width: 2.0,
+                          ),
+                        ),
+                      ),
+                      child: Row(
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Business Documents',
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black,
+                                ),
+                              ),
+                              const SizedBox(height: 10),
+                              const Text(
+                                'Upload and manage your business registration and tax documents',
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w400,
+                                    color: Color(0xFF63748B),
+                                ),
+                              ),
+                              const SizedBox(height: 4),
+                            ]
+                          )
+                        ]
+                      )
                     ),
                     const SizedBox(height: 24),
 
                     // Upload Document Button
-                    SizedBox(
-                    width: 200,
-                    child: ElevatedButton.icon(
-                        onPressed: _pickDocument,
-                        icon: const Icon(Icons.upload_file, size: 18),
-                        label: const Text('Upload Document'),
-                        style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF6366F1),
-                        foregroundColor: Colors.white,
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 20,
-                            vertical: 12,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        PrimaryButton(
+                          text: 'Upload Document',
+                          icon: Icon.sports_soccer,
+                          onPressed: _pickDocument,
+                          backgroundColor1: Color(0xFF6775DC),
+                          backgroundColor2: Color(0xFF7256B1),
+                          textColor: Colors.white,
+                          borderColor: Color(0xFFCCCCCC),
+                          height: 28,
+                          width: 174,
                         ),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(6),
-                        ),
-                        ),
-                    ),
+                      ]
                     ),
                     const SizedBox(height: 24),
 
@@ -212,10 +252,10 @@ class _BusinessDialogState extends State<BusinessDialog> {
                     Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                        color: const Color(0xFFFEF3C7),
+                        color: const Color(0xFFFFFFFF),
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(
-                        color: const Color(0xFFFBBF24),
+                        color: const Color(0xFFD9D9D9),
                         width: 1,
                         ),
                     ),
@@ -236,17 +276,17 @@ class _BusinessDialogState extends State<BusinessDialog> {
                                 'Required Documents :',
                                 style: TextStyle(
                                     fontSize: 14,
-                                    fontWeight: FontWeight.w500,
-                                    color: Color(0xFF92400E),
+                                    fontWeight: FontWeight.w400,
+                                    color: Color(0xFF8B8989),
                                 ),
                                 ),
                                 const SizedBox(height: 4),
                                 Text(
                                 'Business Registration, Tax Registration Certificate, and billing proof are required for verification. Documents should be current and clearly readable.',
                                 style: TextStyle(
-                                    fontSize: 13,
-                                    color: Colors.grey[800],
-                                    height: 1.4,
+                                    fontSize: 14,
+                                    color: Color(0xFF63748B),
+                                    fontWeight: FontWeight.w400,
                                 ),
                                 ),
                             ],
@@ -258,26 +298,43 @@ class _BusinessDialogState extends State<BusinessDialog> {
 
                     // Display uploaded files
                     if (_uploadedFiles.isNotEmpty) ...[
-                    const SizedBox(height: 20),
-                    ..._uploadedFiles.map((file) => Padding(
-                        padding: const EdgeInsets.only(bottom: 8),
-                        child: Row(
-                        children: [
-                            const Icon(Icons.description, size: 20, color: Colors.grey),
-                            const SizedBox(width: 8),
-                            Expanded(child: Text(file)),
-                            IconButton(
-                            icon: const Icon(Icons.close, size: 20),
-                            onPressed: () {
-                                setState(() {
-                                _uploadedFiles.remove(file);
-                                });
-                            },
-                            ),
-                        ],
-                        ),
-                    )).toList(),
+                      const SizedBox(height: 20),
+                      ..._uploadedFiles.map((file) => Padding(
+                          padding: const EdgeInsets.only(bottom: 8),
+                          child: Row(
+                          children: [
+                              const Icon(Icons.description, size: 20, color: Colors.grey),
+                              const SizedBox(width: 8),
+                              Expanded(child: Text(file)),
+                              IconButton(
+                              icon: const Icon(Icons.close, size: 20),
+                              onPressed: () {
+                                  setState(() {
+                                  _uploadedFiles.remove(file);
+                                  });
+                              },
+                              ),
+                          ],
+                          ),
+                      )).toList(),
                     ],
+
+                    // Save Button
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        PrimaryButton(
+                          text: 'Save Changes',
+                          onPressed: _pickDocument,
+                          backgroundColor1: Color(0xFF6775DC),
+                          backgroundColor2: Color(0xFF7256B1),
+                          textColor: Colors.white,
+                          borderColor: Color(0xFFCCCCCC),
+                          height: 28,
+                          width: 174,
+                        ),
+                      ]
+                    ),
                 ],
                 ),
             ),
